@@ -18,21 +18,18 @@ public static void main(String[] args) throws Exception {
 
     String fileName = args[0];
 
-
     final AudioFormat af = new AudioFormat(Note.SAMPLE_RATE, 8, 1, true, false);
-    Tone t = new Tone(af);
 
     List<BellNote> song = readSong(fileName);
 
     Conductor conductor = new Conductor(song, af);
 
-    if (song.isEmpty()) {
-        System.err.println(fileName + " not found.");
+    if (song == null) {
+        System.err.println("Song loading failed due to errors.");
     } else {
         System.out.println("Playing downloaded song from file...");
         conductor.run();
         conductor.stopMembers();
-//        t.playSong(song);
     }
 }
 
@@ -62,43 +59,57 @@ public static void main(String[] args) throws Exception {
         line.write(Note.REST.sample(), 0, 50);
     }
 
-    public static List<BellNote> readSong(String filename) {
-        List<BellNote> result = new ArrayList<>();
+public static List<BellNote> readSong(String filename) {
+    List<BellNote> result = new ArrayList<>();
+    boolean errorOccurred = false;
 
-        try (Scanner scanner = new Scanner(new File(filename))) {
-            while (scanner.hasNext()) {
-                String noteStr = scanner.next();
-                if (!scanner.hasNextInt()) {
-                    System.err.println("Invalid format after the note: " + noteStr);
-                    break;
-                }
-                int duration = scanner.nextInt();
+    try (Scanner scanner = new Scanner(new File(filename))) {
+        while (scanner.hasNext()) {
+            String noteStr = scanner.next();
 
-                try {
-                    Note note = Note.valueOf(noteStr);
-                    NoteLength length;
-
-                    switch (duration) {
-                        case 1: length = NoteLength.WHOLE; break;
-                        case 2: length = NoteLength.HALF; break;
-                        case 4: length = NoteLength.QUARTER; break;
-                        case 8: length = NoteLength.EIGTH; break;
-                        default:
-                            System.err.println("Unaccepted duration: " + duration);
-                            continue;
-                    }
-
-                    result.add(new BellNote(note, length));
-                } catch (IllegalArgumentException e) {
-                    System.out.println("Invalid note name: " + noteStr);
-                }
+            if (!scanner.hasNextInt()) {
+                System.err.println("Invalid format after the note: " + noteStr);
+                errorOccurred = true;
+                break;
             }
-        } catch (FileNotFoundException e) {
-            System.err.println("File not found: " + filename);
-        }
 
-        return result;
+            int duration = scanner.nextInt();
+            Note note = null;
+            try {
+                note = Note.valueOf(noteStr);
+            } catch (IllegalArgumentException e) {
+                System.err.println("Invalid note name: " + noteStr);
+                errorOccurred = true;
+                break;
+            }
+
+            NoteLength length = null;
+            switch (duration) {
+                case 1: length = NoteLength.WHOLE; break;
+                case 2: length = NoteLength.HALF; break;
+                case 4: length = NoteLength.QUARTER; break;
+                case 8: length = NoteLength.EIGTH; break;
+                default:
+                    System.err.println("Unaccepted duration: " + duration);
+                    errorOccurred = true;
+                    break;
+            }
+
+            if (note != null && length != null) {
+                result.add(new BellNote(note, length));
+            }
+        }
+    } catch (FileNotFoundException e) {
+        System.err.println("File not found: " + filename);
+        return null;
     }
+
+    if (errorOccurred || result.isEmpty()) {
+        return null; // don't play if there's any error or nothing to play
+    }
+
+    return result;
+}
 }
 
 class BellNote {

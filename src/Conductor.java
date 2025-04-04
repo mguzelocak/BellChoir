@@ -17,7 +17,6 @@ public class Conductor implements Runnable {
 
     @Override
     public void run() {
-//        int silenceLength = Note.SAMPLE_RATE / 20;
         try (final SourceDataLine line = AudioSystem.getSourceDataLine(af)) {
             getMembers(songs, line);
             line.open();
