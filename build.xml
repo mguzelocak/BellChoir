@@ -24,12 +24,12 @@
   </target>
 
   <target name="songarg" unless="song">
-    <property name="song" value="${basedir}/MaryLamb.txt"/>
+    <property name="song" value="MaryLamb.txt"/>
   </target>
 
   <target name="run" depends="jar,songarg">
     <java jar="${out}/${ant.project.name}.jar" fork="true">
-      <arg value="${song}"/>
+      <arg value="storage/${song}"/>
     </java>
   </target>
 
