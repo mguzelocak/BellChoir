@@ -19,7 +19,7 @@ enum NoteLength {
     EIGTH(0.125f);
 
     /**
-     * A float fraction of a whole note
+     * A float fraction of a whole not
      */
     private final int timeMs;
 
