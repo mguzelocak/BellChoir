@@ -240,7 +240,7 @@ public class Tone {
         if (result.isEmpty()) {
             System.err.println("No song loaded.");
         }
-        
+
         if (errorOccurred || result.isEmpty()) {
             return null; // don't play if there's any error or nothing to play
         }
