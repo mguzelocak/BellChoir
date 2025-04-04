@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>/Users/muratguzelocak/Documents/School/Spring 2025/CS410/Tone/src</OriginalElement>
+  <nodes>
+    <node x="56.31562189183674" y="-57.36827884775446">NoteLength</node>
+    <node x="-180.73870302870031" y="371.31441707501403">Member</node>
+    <node x="-176.82405002843305" y="871.2990923259784">Tone</node>
+    <node x="-181.6817587949052" y="-56.202338776402954">Note</node>
+    <node x="-109.70614840961255" y="642.5235176025811">Conductor</node>
+    <node x="36.53333269524512" y="173.91188484929012">BellNote</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="BellNote" target="NoteLength" relationship="TO_ONE">
+      <point x="17.78228919659162" y="-56.0" />
+      <point x="0.0" y="68.0" />
+    </edge>
+    <edge source="Conductor" target="Member" relationship="CREATE">
+      <point x="0.0" y="-68.0" />
+      <point x="102.03255461908776" y="80.0" />
+    </edge>
+    <edge source="Conductor" target="BellNote" relationship="TO_MANY">
+      <point x="66.46714840961255" y="-67.99951760258114" />
+      <point x="138.761" y="329.0" />
+      <point x="148.533" y="329.0" />
+      <point x="-3.3269524513457327E-4" y="56.00011515070986" />
+    </edge>
+    <edge source="Tone" target="BellNote" relationship="CREATE">
+      <point x="151.0" y="0.0" />
+      <point x="293.8156218918367" y="951.2990923259784" />
+      <point x="293.8156218918367" y="229.91188484929012" />
+      <point x="112.0" y="0.0" />
+    </edge>
+    <edge source="Tone" target="Conductor" relationship="CREATE">
+      <point x="98.1179016188205" y="-80.0" />
+      <point x="0.0" y="68.0" />
+    </edge>
+    <edge source="Member" target="BellNote" relationship="TO_ONE">
+      <point x="-2.969712996856444E-4" y="-80.00041707501401" />
+      <point x="-29.739" y="329.0" />
+      <point x="148.533" y="329.0" />
+      <point x="-3.3269524513457327E-4" y="56.00011515070986" />
+    </edge>
+    <edge source="Conductor" target="Member" relationship="TO_MANY">
+      <point x="-102.03255461908776" y="-68.0" />
+      <point x="0.0" y="80.0" />
+    </edge>
+    <edge source="Conductor" target="Tone" relationship="TO_ONE">
+      <point x="-98.1179016188205" y="68.0" />
+      <point x="0.0" y="-80.0" />
+    </edge>
+    <edge source="BellNote" target="Note" relationship="TO_ONE">
+      <point x="-112.0" y="0.0" />
+      <point x="-93.18175879490519" y="229.91188484929012" />
+      <point x="0.0" y="68.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Compact" zoom="0.8677884615384616" showDependencies="true" x="56.0" y="450.0" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
