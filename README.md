@@ -9,7 +9,7 @@ The hardest part of this project is again like the previous project,
 making sure threads or Members do not play the music at the same time.
 Also, making sure to catch all the code was really hard.
 
-
+![UML Diagram](docs/tone.uml)
 
 
 
